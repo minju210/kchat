@@ -10,7 +10,7 @@ producer = KafkaProducer(
 
 start = time.time()
 
-for i in range(10):
+for i in tqdm(range(10)):
     data = {'str': 'value' + str(i)}
     producer.send('topic1', value=data)
     producer.flush()
