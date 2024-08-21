@@ -28,10 +28,13 @@ consumer = KafkaConsumer(
 
 print('[Start] get consumer')
 
+p = TopicPartition('topic1', 0)
+consumer.assign([p])
+
 if saved_offset is not None:
-    p = TopicPartition('topic1', 0)
-    consumer.assign([p])
     consumer.seek(p, saved_offset)
+else:
+    consumer.seek_to_beginning(p)
 
 for m in consumer:
     print(f"offset={m.offset}, value={m.value}")
